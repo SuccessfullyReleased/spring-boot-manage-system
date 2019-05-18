@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="rabc:war">
+    <output-path>$PROJECT_DIR$/rabc/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>rabc</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="rabc-2.0.war">
+      <element id="artifact" artifact-name="rabc:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="spring-boot-rbac:war">
+    <output-path>$PROJECT_DIR$/spring-boot-rbac/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>spring-boot-rbac</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="spring-boot-rbac-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="spring-boot-rbac:war exploded" />
+    </root>
+  </artifact>
+</component>
