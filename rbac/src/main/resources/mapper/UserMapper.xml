@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.rbac.dao.custom.UserMapper">
+
+	<resultMap id="user" type="com.demo.rbac.model.User">
+		<id column="uid" jdbcType="INTEGER" property="uid"/>
+		<result column="username" jdbcType="VARCHAR" property="username"/>
+		<result column="password" jdbcType="VARCHAR" property="password"/>
+		<result column="sex" jdbcType="INTEGER" property="sex"/>
+		<result column="phone" jdbcType="VARCHAR" property="phone"/>
+		<result column="mail" jdbcType="VARCHAR" property="mail"/>
+		<result column="avator" jdbcType="VARCHAR" property="avator"/>
+		<collection property="userGroups" ofType="com.demo.rbac.model.UserGroup" resultMap="userGroup"/>
+		<collection property="roles" ofType="com.demo.rbac.model.Role" resultMap="role"/>
+	</resultMap>
+
+	<resultMap id="userGroup" type="com.demo.rbac.model.UserGroup">
+		<id column="ugid" jdbcType="INTEGER" property="ugid"/>
+		<result column="groupname" jdbcType="VARCHAR" property="groupname"/>
+		<result column="note" jdbcType="VARCHAR" property="note"/>
+		<result column="parent" jdbcType="INTEGER" property="parent"/>
+	</resultMap>
+
+	<resultMap id="role" type="com.demo.rbac.model.Role">
+		<id column="rid" jdbcType="INTEGER" property="rid"/>
+		<result column="rolename" jdbcType="VARCHAR" property="rolename"/>
+		<result column="note" jdbcType="VARCHAR" property="note"/>
+		<result column="parent" jdbcType="INTEGER" property="parent"/>
+	</resultMap>
+
+	<select id="selectUserGroup" resultMap="userGroup">
+		select ug.* from user u LEFT JOIN user_usergroup uug on u.uid = uug.uid LEFT JOIN usergroup ug on uug.ugid = ug.ugid
+		<where>
+			<if test="uid!=null">
+				u.uid=#{uid,jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+	<select id="selectRole" resultMap="role">
+		select r.* from user u LEFT JOIN user_role ur on u.uid = ur.uid LEFT JOIN role r on ur.rid = r.rid
+		<where>
+			<if test="uid!=null">
+				u.uid=#{uid,jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+	<select id="selectGroupName" resultMap="user">
+		select u.*,ug.* from user u
+		LEFT JOIN user_usergroup uug on u.uid = uug.uid
+		LEFT JOIN usergroup ug on uug.ugid = ug.ugid
+		<where>
+			<if test="groupname != null">
+				ug.groupname like #{groupname,jdbcType=VARCHAR}
+			</if>
+		</where>
+		<if test="order != null">
+    	order by ${orderColumn} ${order}
+    </if>
+	</select>
+	<select id="selectRoleName" resultMap="user">
+		select u.*,r.* from user u
+		LEFT JOIN user_role ur on u.uid = ur.uid
+		LEFT JOIN role r on ur.rid = r.rid
+		<where>
+			<if test="rolename != null">
+				r.rolename like #{rolename,jdbcType=VARCHAR}
+			</if>
+		</where>
+		<if test="order != null">
+    	order by ${orderColumn} ${order}
+    </if>
+	</select>
+</mapper>

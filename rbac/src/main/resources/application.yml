@@ -1,0 +1,80 @@
+server:
+  address: 0.0.0.0
+  port: 5000
+  servlet:
+    context-path: /rbac
+  tomcat:
+    uri-encoding: UTF-8
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: platform
+    key-store-type: PKCS12
+    key-alias: tomcat
+
+spring:
+  aop:
+    proxy-target-class: true
+  servlet:
+    multipart:
+      max-request-size: 10MB
+      max-file-size: 5MB
+
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+    converters:
+      preferred-json-mapper: gson
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring_boot_manage_system?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 30000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: false
+      maxPoolPreparedStatementPerConnectionSize: 20
+      filters: stat
+      useGlobalDataSourceStat: true
+      logSlowSql: true
+
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+  cache:
+    type: redis
+
+mybatis:
+  typeAliasesPackage: com.demo.rbac.model
+  mapperLocations: classpath:mapper/*.xml
+
+mapper:
+  mappers:
+    - com.demo.rbac.util.dao.BaseDao
+  not-empty: false
+  identity: MYSQL
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

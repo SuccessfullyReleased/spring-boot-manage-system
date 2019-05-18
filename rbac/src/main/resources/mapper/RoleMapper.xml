@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.rbac.dao.custom.RoleMapper">
+
+	<select id="selectAccess" resultType="com.demo.rbac.model.Access">
+		select r.*,a.* from role r LEFT JOIN role_access ra on r.rid=ra.rid LEFT JOIN access a on ra.aid=a.aid
+		<where>
+			<if test="rid!=null">
+				r.rid=#{rid,jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+</mapper>

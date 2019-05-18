@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.rbac.dao.custom.AccessMapper">
+	<resultMap id="access" type="com.demo.rbac.model.Access">
+		<id column="aid" jdbcType="INTEGER" property="aid"/>
+		<result column="type" jdbcType="VARCHAR" property="type"/>
+		<collection property="menu" ofType="com.demo.rbac.model.Menu" resultMap="menu"/>
+		<collection property="operation" ofType="com.demo.rbac.model.Operation" resultMap="operation"/>
+	</resultMap>
+	<resultMap id="menu" type="com.demo.rbac.model.Menu">
+		<id column="mid" jdbcType="INTEGER" property="mid"/>
+		<result column="name" jdbcType="VARCHAR" property="name"/>
+		<result column="key" jdbcType="VARCHAR" property="key"/>
+		<result column="parent" jdbcType="INTEGER" property="parent"/>
+	</resultMap>
+	<resultMap id="operation" type="com.demo.rbac.model.Operation">
+		<id column="oid" jdbcType="INTEGER" property="oid"/>
+		<result column="oname" jdbcType="VARCHAR" property="name"/>
+		<result column="okey" jdbcType="VARCHAR" property="key"/>
+		<result column="oparent" jdbcType="INTEGER" property="parent"/>
+	</resultMap>
+
+	<select id="selectById" resultMap="access">
+		select a.*,m.*,o.oid,o.name oname,o.key okey,o.parent oparent
+		FROM access a LEFT JOIN access_menu am on a.aid=am.aid
+		LEFT JOIN menu m on am.mid=m.mid
+		LEFT JOIN access_operation ao on a.aid=ao.aid
+		LEFT JOIN operation o on ao.oid=o.oid
+		<where>
+			<if test="aid!=null">
+				a.aid=#{aid,jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+</mapper>
