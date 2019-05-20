@@ -32,6 +32,7 @@ public class UserControlImpl extends BaseControl<User> implements UserControl {
     @PostMapping(value = "user/avator")
     @Override
     public ResponseEntity updateAvator(@RequestParam Integer uid, @RequestParam MultipartFile file) {
+        log.info("UserControlImpl::updateAvator::uid = [{}], file = [{}]", uid, file);
         UserService service = (UserService) getService();
         service.updateAvator(uid, file);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -41,24 +42,28 @@ public class UserControlImpl extends BaseControl<User> implements UserControl {
     @PostMapping(value = "user/token")
     @Override
     public ResponseEntity createToken(@RequestParam String username) {
+        log.info("UserControlImpl::createToken::username = [{}]", username);
         return new ResponseEntity<>(manager.encode(manager.createToken(username)), HttpStatus.OK);
     }
 
     @GetMapping(value = "user/token")
     @Override
     public ResponseEntity checkToken() {
+        log.info("UserControlImpl::checkToken::");
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @GetMapping(value = "user/uid/{id}")
     @Override
     public ResponseEntity selectOneById(@PathVariable Integer id) {
+        log.info("UserControlImpl::selectOneById::id = [{}]", id);
         return super.selectOneById(id);
     }
 
     @GetMapping(value = "user")
     @Override
     public ResponseEntity selectOne(@RequestParam String model) {
+        log.info("UserControlImpl::selectOne::model = [{}]", model);
         return super.selectOne(model);
     }
 
@@ -66,6 +71,7 @@ public class UserControlImpl extends BaseControl<User> implements UserControl {
     @GetMapping(value = "user/count")
     @Override
     public ResponseEntity selectCount(@RequestParam String model) {
+        log.info("UserControlImpl::selectCount::model = [{}]", model);
         return super.selectCount(model);
     }
 
@@ -75,30 +81,35 @@ public class UserControlImpl extends BaseControl<User> implements UserControl {
                                         @RequestParam(required = false) String key,
                                         @RequestParam(required = false) String orderColumn,
                                         @RequestParam(required = false) String order) {
+        log.info("UserControlImpl::selectRecords::keyColumn = [{}], key = [{}], orderColumn = [{}], order = [{}]", keyColumn, key, orderColumn, order);
         return super.selectRecords(keyColumn, key, orderColumn, order);
     }
 
     @PostMapping(value = "user")
     @Override
     public ResponseEntity insertRecord(@RequestBody User model) {
+        log.info("UserControlImpl::insertRecord::model = [{}]", model);
         return super.insertRecord(model);
     }
 
     @DeleteMapping(value = "user/uid/{id}")
     @Override
     public ResponseEntity deleteRecord(@PathVariable Integer id) {
+        log.info("UserControlImpl::deleteRecord::id = [{}]", id);
         return super.deleteRecord(id);
     }
 
     @DeleteMapping(value = "users")
     @Override
     public ResponseEntity deleteRecords(@RequestBody List<User> list) {
+        log.info("UserControlImpl::deleteRecords::list = [{}]", list);
         return super.deleteRecords(list);
     }
 
     @PutMapping(value = "user")
     @Override
     public ResponseEntity updateRecord(@RequestBody User model) {
+        log.info("UserControlImpl::updateRecord::model = [{}]", model);
         return super.updateRecord(model);
     }
 }

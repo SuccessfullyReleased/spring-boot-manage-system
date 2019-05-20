@@ -11,6 +11,13 @@ import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import java.io.Serializable;
 
+/**
+ * @author 戴俊明
+ * @version 1.0
+ * @className Operation
+ * @description 操作的实体类
+ * @date 2019/5/20 16:28
+ **/
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

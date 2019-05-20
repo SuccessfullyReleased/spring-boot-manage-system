@@ -51,7 +51,7 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
     @Cacheable(value = "roles", key = "#id")
     @Override
     public Role selectOneById(@NotNull @Min(value = 1, message = "id最小不能小于1") Integer id) {
-        log.info("RoleServiceImpl: " + "selectOneById: " + id);
+        log.info("RoleServiceImpl::selectOneById::id = [{}]", id);
         Role role = super.selectOneById(id);
         role.setAccesses(roleMapper.selectAccess(role.getRid())
                 .stream().filter(Objects::nonNull).collect(Collectors.toList()));
@@ -66,7 +66,7 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
     @Cacheable(value = "roles", key = "#model")
     @Override
     public Role selectOne(@NotNull Role model) {
-        log.info("RoleServiceImpl: " + "selectOne: " + model);
+        log.info("RoleServiceImpl::selectOne::model = [{}]", model);
         Role role = super.selectOne(model);
         role.setAccesses(roleMapper.selectAccess(role.getRid())
                 .stream().filter(Objects::nonNull).collect(Collectors.toList()));
@@ -75,7 +75,7 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 
     @Override
     public int insertRecord(@NotNull Role model) {
-        log.info("RoleServiceImpl: " + "insertRecord: " + model);
+        log.info("RoleServiceImpl::insertRecord::model = [{}]", model);
         User admin = new User();
         admin.setUsername("admin");
         admin = userDao.selectOne(admin);
@@ -86,6 +86,7 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 
     @Override
     public List<Role> selectRecords(String keyColumn, String key, String orderColumn, String order) {
+        log.info("RoleServiceImpl::selectRecords::keyColumn = [{}], key = [{}], orderColumn = [{}], order = [{}]", keyColumn, key, orderColumn, order);
         List<Role> roles = super.selectRecords(keyColumn, key, orderColumn, order);
         for (Role role : roles) {
             role.setAccesses(roleMapper.selectAccess(role.getRid())
@@ -97,12 +98,14 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
     @CacheEvict(value = "roles", allEntries = true)
     @Override
     public int deleteRecords(@NotEmpty List<Role> list) {
+        log.info("RoleServiceImpl::deleteRecords::list = [{}]", list);
         return list.stream().mapToInt(Role::getRid).reduce(0, (x, y) -> x + getDao().deleteByPrimaryKey(y));
     }
 
     @CacheEvict(value = "roles", allEntries = true)
     @Override
     public int updateRecord(@NotNull Role model) {
+        log.info("RoleServiceImpl::updateRecord::model = [{}]", model);
         if (CollUtil.isNotEmpty(model.getAccesses())) {
             List<Integer> news = model.getAccesses().stream().mapToInt(Access::getAid).boxed().distinct().collect(Collectors.toList());
             List<Integer> olds = roleMapper.selectAccess(model.getRid())
@@ -125,6 +128,7 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 
     @Override
     public List<Access> selectAccesses(@NotEmpty List<Role> roles) {
+        log.info("RoleServiceImpl::selectAccesses::roles = [{}]", roles);
         List<Access> accesses = new ArrayList<>();
         for (Role role : roles) {
             accesses.addAll(roleMapper.selectAccess(role.getRid())

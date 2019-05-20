@@ -11,6 +11,13 @@ import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import java.io.Serializable;
 
+/**
+ * @author 戴俊明
+ * @version 1.0
+ * @className UserUserGroup
+ * @description 用户与用户组的实体类
+ * @date 2019/5/20 18:16
+ **/
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -10,6 +10,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.ConstraintViolationException;
 
+/**
+ * @author 戴俊明
+ * @version 1.0
+ * @className BaseExceptionHandler
+ * @description 运行时异常全局处理类
+ * @date 2019/5/20 19:05
+ **/
 @Slf4j
 @ControllerAdvice
 public class BaseExceptionHandler {
@@ -17,6 +24,7 @@ public class BaseExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     @ResponseBody
     public ResponseEntity handle(Exception e) {
+        log.info("BaseExceptionHandler::handle::e = [{}]", e);
         if (e instanceof ConstraintViolationException) {
             return new ResponseEntity<>(e.getMessage().split(":")[1].trim(), HttpStatus.BAD_REQUEST);
         } else if (e instanceof BaseException) {

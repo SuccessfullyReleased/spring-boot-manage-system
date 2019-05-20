@@ -13,14 +13,38 @@ import javax.validation.constraints.NotNull;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
+/**
+ * @author 戴俊明
+ * @version 1.0
+ * @className BaseService
+ * @description 封装了基本的CRUD业务
+ * @date 2019/5/20 18:52
+ **/
 public abstract class BaseService<T> implements CommonService<T> {
-
+    /**
+     * @author 戴俊明
+     * @description 持久层类
+     * @date 2019/5/20 18:53
+     **/
     private BaseDao<T> dao;
 
+    /**
+     * @param dao 持久层类
+     * @return void
+     * @author 戴俊明
+     * @description 获取持久层（必须重写）
+     * @date 2019/5/20 18:54
+     **/
     public void setDao(BaseDao<T> dao) {
         this.dao = dao;
     }
 
+    /**
+     * @return com.demo.rbac.util.dao.BaseDao<T>
+     * @author 戴俊明
+     * @description 获取持久层类，以支持各个业务层独有的业务
+     * @date 2019/5/20 18:54
+     **/
     public BaseDao<T> getDao() {
         return dao;
     }

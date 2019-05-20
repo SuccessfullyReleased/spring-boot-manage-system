@@ -12,6 +12,13 @@ import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import java.io.Serializable;
 
+/**
+ * @author 戴俊明
+ * @version 1.0
+ * @className Access
+ * @description 权限的实体类
+ * @date 2019/5/20 16:27
+ **/
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

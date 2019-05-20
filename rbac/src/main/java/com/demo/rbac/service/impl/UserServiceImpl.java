@@ -56,7 +56,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     @Cacheable(value = "users", key = "#id")
     @Override
     public User selectOneById(@NotNull @Min(value = 1, message = "id最小不能小于1") Integer id) {
-        log.info("selectOneById: " + "[id]");
+        log.info("UserServiceImpl::selectOneById::id = [{}]", id);
         User user = super.selectOneById(id);
         user.setUserGroups(userMapper.selectUserGroup(user.getUid())
                 .stream().filter(Objects::nonNull).collect(Collectors.toList()));
@@ -68,7 +68,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     @Cacheable(value = "users", key = "#model")
     @Override
     public User selectOne(@NotNull User model) {
-        log.info("selectOne: " + "[model]");
+        log.info("UserServiceImpl::selectOne::model = [{}]", model);
         User user = super.selectOne(model);
         user.setUserGroups(userMapper.selectUserGroup(user.getUid())
                 .stream().filter(Objects::nonNull).collect(Collectors.toList()));
@@ -80,13 +80,14 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     @Cacheable(value = "users_count", key = "#model")
     @Override
     public int selectCount(@NotNull User model) {
-        log.info("selectCount: " + "[model]");
+        log.info("UserServiceImpl::selectCount::model = [{}]", model);
         return super.selectCount(model);
     }
 
     @Transactional
     @Override
     public int insertRecord(@NotNull User model) {
+        log.info("UserServiceImpl::insertRecord::model = [{}]", model);
         int result = super.insertRecord(model);
         if (CollUtil.isNotEmpty(model.getUserGroups())) {
             for (UserGroup userGroup : model.getUserGroups()) {
@@ -111,7 +112,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 
     @Override
     public List<User> selectRecords(String keyColumn, String key, String orderColumn, String order) {
-        log.info("selectRecords: " + "[keyColumn, key, orderColumn, order]");
+        log.info("UserServiceImpl::selectRecords::keyColumn = [{}], key = [{}], orderColumn = [{}], order = [{}]", keyColumn, key, orderColumn, order);
         String[] keys = filter(keyColumn, key, orderColumn, order);
         List<User> users;
         if (keyColumn != null && (keyColumn.equals("groupname") || keyColumn.equals("rolename"))) {
@@ -140,16 +141,18 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
         return users;
     }
 
-    @CacheEvict(value = "users",allEntries = true)
+    @CacheEvict(value = "users", allEntries = true)
     @Override
     public int deleteRecord(@NotNull @Min(value = 1, message = "id最小不能小于1") Integer id) {
+        log.info("UserServiceImpl::deleteRecord::id = [{}]", id);
         return super.deleteRecord(id);
     }
 
-    @CacheEvict(value = "users",allEntries = true)
+    @CacheEvict(value = "users", allEntries = true)
     @Transactional
     @Override
     public void updateAvator(@NotNull @Min(value = 1, message = "id最小不能小于1") Integer id, @NotNull MultipartFile file) {
+        log.info("UserServiceImpl::updateAvator::id = [{}], file = [{}]", id, file);
         File dest = fileDao.saveTo(file, ResourceConstants.AVATOR);
         User user = getDao().selectByPrimaryKey(id);
         String oldFileName = user.getAvator();
@@ -162,16 +165,18 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
         }
     }
 
-    @CacheEvict(value = "users",allEntries = true)
+    @CacheEvict(value = "users", allEntries = true)
     @Override
     public int deleteRecords(@NotEmpty List<User> list) {
+        log.info("UserServiceImpl::deleteRecords::list = [{}]", list);
         return list.stream().mapToInt(User::getUid).reduce(0, (x, y) -> x + getDao().deleteByPrimaryKey(y));
     }
 
-    @CacheEvict(value = "users",allEntries = true)
+    @CacheEvict(value = "users", allEntries = true)
     @Transactional
     @Override
     public int updateRecord(@NotNull User model) {
+        log.info("UserServiceImpl::updateRecord::model = [{}]", model);
         if (model.getUserGroups() != null) {
             List<Integer> news = model.getUserGroups().stream().mapToInt(UserGroup::getUgid).boxed().distinct().collect(Collectors.toList());
             List<Integer> olds = userMapper.selectUserGroup(model.getUid())

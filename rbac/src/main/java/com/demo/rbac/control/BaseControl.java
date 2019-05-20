@@ -9,18 +9,46 @@ import org.springframework.http.ResponseEntity;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
+/**
+ * @author 戴俊明
+ * @version 1.0
+ * @className BaseControl
+ * @description 封装了基本的CRUD表现
+ * @date 2019/5/20 15:48
+ **/
 public abstract class BaseControl<T> implements CommonControl<T> {
-
+    /**
+     * @author 戴俊明
+     * @description 业务类
+     * @date 2019/5/20 15:53
+     **/
     private BaseService<T> service;
 
+    /**
+     * @param service 业务类实体
+     * @author 戴俊明
+     * @description 获取业务类（必须重写）
+     * @date 2019/5/20 15:49
+     **/
     public void setService(BaseService<T> service) {
         this.service = service;
     }
 
+    /**
+     * @return com.demo.rbac.service.BaseService<T>
+     * @author 戴俊明
+     * @description 获取业务类，以支持各个表现层独有的业务
+     * @date 2019/5/20 15:51
+     **/
     public BaseService<T> getService() {
         return service;
     }
 
+    /**
+     * @author 戴俊明
+     * @description json解析类
+     * @date 2019/5/20 15:54
+     **/
     @Autowired
     private Gson gson;
 

@@ -78,3 +78,7 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+
+logging:
+  file: log/rbac.log
+  level.*: info

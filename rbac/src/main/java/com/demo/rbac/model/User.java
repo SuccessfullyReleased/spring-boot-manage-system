@@ -14,6 +14,13 @@ import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * @author 戴俊明
+ * @version 1.0
+ * @className User
+ * @description 用户的实体类
+ * @date 2019/5/20 18:14
+ **/
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

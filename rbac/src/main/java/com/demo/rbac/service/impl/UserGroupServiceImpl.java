@@ -11,6 +11,7 @@ import com.demo.rbac.service.BaseService;
 import com.demo.rbac.service.UserGroupService;
 import com.demo.rbac.util.Exception.BaseException;
 import com.demo.rbac.util.dao.BaseDao;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class UserGroupServiceImpl extends BaseService<UserGroup> implements UserGroupService {
 
@@ -48,6 +50,7 @@ public class UserGroupServiceImpl extends BaseService<UserGroup> implements User
     @Cacheable(value = "groups", key = "#id")
     @Override
     public UserGroup selectOneById(@NotNull @Min(value = 1, message = "id最小不能小于1") Integer id) {
+        log.info("UserGroupServiceImpl::selectOneById::id = [{}]", id);
         UserGroup userGroup = super.selectOneById(id);
         userGroup.setRoles(userGroupMapper.selectRole(userGroup.getUgid())
                 .stream().filter(Objects::nonNull).collect(Collectors.toList()));
@@ -57,6 +60,7 @@ public class UserGroupServiceImpl extends BaseService<UserGroup> implements User
     @Cacheable(value = "groups", key = "#model")
     @Override
     public UserGroup selectOne(@NotNull UserGroup model) {
+        log.info("UserGroupServiceImpl::selectOne::model = [{}]", model);
         UserGroup userGroup = super.selectOne(model);
         userGroup.setRoles(userGroupMapper.selectRole(userGroup.getUgid())
                 .stream().filter(Objects::nonNull).collect(Collectors.toList()));
@@ -65,6 +69,7 @@ public class UserGroupServiceImpl extends BaseService<UserGroup> implements User
 
     @Override
     public int insertRecord(@NotNull UserGroup model) {
+        log.info("UserGroupServiceImpl::insertRecord::model = [{}]", model);
         User admin = new User();
         admin.setUsername("admin");
         admin = userDao.selectOne(admin);
@@ -84,6 +89,7 @@ public class UserGroupServiceImpl extends BaseService<UserGroup> implements User
 
     @Override
     public List<UserGroup> selectRecords(String keyColumn, String key, String orderColumn, String order) {
+        log.info("UserGroupServiceImpl::selectRecords::keyColumn = [{}], key = [{}], orderColumn = [{}], order = [{}]", keyColumn, key, orderColumn, order);
         List<UserGroup> userGroups = super.selectRecords(keyColumn, key, orderColumn, order);
         for (UserGroup userGroup : userGroups) {
             userGroup.setRoles(userGroupMapper.selectRole(userGroup.getUgid())
@@ -95,12 +101,14 @@ public class UserGroupServiceImpl extends BaseService<UserGroup> implements User
     @CacheEvict(value = "groups", allEntries = true)
     @Override
     public int deleteRecords(@NotEmpty List<UserGroup> list) {
+        log.info("UserGroupServiceImpl::deleteRecords::list = [{}]", list);
         return list.stream().mapToInt(UserGroup::getUgid).reduce(0, (x, y) -> x + getDao().deleteByPrimaryKey(y));
     }
 
     @CacheEvict(value = "groups", allEntries = true)
     @Override
     public int updateRecord(@NotNull UserGroup model) {
+        log.info("UserGroupServiceImpl::updateRecord::model = [{}]", model);
         if (CollUtil.isNotEmpty(model.getRoles())) {
             List<Integer> news = model.getRoles().stream().mapToInt(Role::getRid).boxed().distinct().collect(Collectors.toList());
             List<Integer> olds = userGroupMapper.selectRole(model.getUgid())
@@ -123,6 +131,7 @@ public class UserGroupServiceImpl extends BaseService<UserGroup> implements User
 
     @Override
     public List<Role> selectRoles(@NotEmpty List<UserGroup> userGroups) {
+        log.info("UserGroupServiceImpl::selectRoles::userGroups = [{}]", userGroups);
         List<Role> roles = new ArrayList<>();
         for (UserGroup userGroup : userGroups) {
             roles.addAll(userGroupMapper.selectRole(userGroup.getUgid())

@@ -14,8 +14,12 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 /**
- * druid 连接池配置类
- */
+ * @author 戴俊明
+ * @version 1.0
+ * @className DruidConfig
+ * @description druid 连接池配置类
+ * @date 2019/5/20 15:44
+ **/
 @Configuration
 public class DruidConfig {
 
