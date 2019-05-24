@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/cms/cms.iml" filepath="$PROJECT_DIR$/cms/cms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/code-generation/code-generation.iml" filepath="$PROJECT_DIR$/code-generation/code-generation.iml" />
       <module fileurl="file://$PROJECT_DIR$/rbac/rbac.iml" filepath="$PROJECT_DIR$/rbac/rbac.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-boot-manage-system.iml" filepath="$PROJECT_DIR$/spring-boot-manage-system.iml" />
     </modules>
