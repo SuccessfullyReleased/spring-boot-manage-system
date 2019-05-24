@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.FloorDao">
+  <resultMap id="BaseResultMap" type="model.Floor">
+    <id column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="nid" jdbcType="INTEGER" property="nid" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="model.Floor">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    fid, author, time, nid
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from floor
+    where fid = #{fid,jdbcType=INTEGER}
+  </select>
+</mapper>
