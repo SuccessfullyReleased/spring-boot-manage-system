@@ -1,15 +1,15 @@
 server:
   address: 0.0.0.0
-  port: 5000
+  port: 9500
   servlet:
     context-path: /rbac
   tomcat:
     uri-encoding: UTF-8
-  ssl:
-    key-store: classpath:keystore.p12
-    key-store-password: platform
-    key-store-type: PKCS12
-    key-alias: tomcat
+#  ssl:
+#    key-store: classpath:keystore.p12
+#    key-store-password: platform
+#    key-store-type: PKCS12
+#    key-alias: tomcat
 
 spring:
   aop:
@@ -27,9 +27,12 @@ spring:
     converters:
       preferred-json-mapper: gson
 
+  gson:
+    date-format: yyyy-MM-dd HH:mm:ss
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/spring_boot_manage_system?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true
+    url: jdbc:mysql://localhost:3306/spring_boot_manage_system_rbac?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useAffectedRows=true
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
@@ -80,5 +83,5 @@ pagehelper:
   params: count=countSql
 
 logging:
-  file: log/rbac.log
+  file: log/rbac/rbac.log
   level.*: info
