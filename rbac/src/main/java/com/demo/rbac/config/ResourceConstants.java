@@ -14,7 +14,7 @@ public class ResourceConstants {
      * @description 头像存储的位置
      * @date 2019/5/20 15:37
      **/
-    public static final String AVATOR = "D:/avator/";
+    public static final String AVATOR = "D:/spring-boot-manage-system/avators/";
 
 
 }

@@ -60,7 +60,7 @@ public abstract class BaseService<T> implements CommonService<T> {
     }
 
     @Override
-    public int selectCount(@NotNull T model) {
+    public Integer selectCount(@NotNull T model) {
         int num = dao.selectCount(model);
         if (num > 0) {
             return num;
@@ -70,7 +70,7 @@ public abstract class BaseService<T> implements CommonService<T> {
     }
 
     @Override
-    public int insertRecord(@NotNull T model) {
+    public Integer insertRecord(@NotNull T model) {
         return dao.insertSelective(model);
     }
 
@@ -80,6 +80,7 @@ public abstract class BaseService<T> implements CommonService<T> {
         Class<T> TClass = (Class<T>) ((ParameterizedType) this.getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0];
         Example example = new Example(TClass);
+        example.setForUpdate(true);
         if (cons[2] != null)
             example.setOrderByClause(StrUtil.format("{} {}", cons[2], cons[3]));
         if (cons[0] != null)
@@ -90,15 +91,15 @@ public abstract class BaseService<T> implements CommonService<T> {
 
     @Transactional
     @Override
-    public int deleteRecord(@NotNull @Min(value = 1, message = "id最小不能小于1") Integer id) {
+    public Integer deleteRecord(@NotNull @Min(value = 1, message = "id最小不能小于1") Integer id) {
         return dao.deleteByPrimaryKey(id);
     }
 
     @Override
-    public abstract int deleteRecords(@NotEmpty List<T> list);
+    public abstract Integer deleteRecords(@NotEmpty List<T> list);
 
     @Override
-    public int updateRecord(@NotNull T model) {
+    public Integer updateRecord(@NotNull T model) {
         return dao.updateByPrimaryKeySelective(model);
     }
 }

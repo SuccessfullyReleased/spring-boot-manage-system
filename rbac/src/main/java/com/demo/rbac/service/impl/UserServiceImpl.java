@@ -79,14 +79,14 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 
     @Cacheable(value = "users_count", key = "#model")
     @Override
-    public int selectCount(@NotNull User model) {
+    public Integer selectCount(@NotNull User model) {
         log.info("UserServiceImpl::selectCount::model = [{}]", model);
         return super.selectCount(model);
     }
 
     @Transactional
     @Override
-    public int insertRecord(@NotNull User model) {
+    public Integer insertRecord(@NotNull User model) {
         log.info("UserServiceImpl::insertRecord::model = [{}]", model);
         int result = super.insertRecord(model);
         if (CollUtil.isNotEmpty(model.getUserGroups())) {
@@ -143,7 +143,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 
     @CacheEvict(value = "users", allEntries = true)
     @Override
-    public int deleteRecord(@NotNull @Min(value = 1, message = "id最小不能小于1") Integer id) {
+    public Integer deleteRecord(@NotNull @Min(value = 1, message = "id最小不能小于1") Integer id) {
         log.info("UserServiceImpl::deleteRecord::id = [{}]", id);
         return super.deleteRecord(id);
     }
@@ -167,7 +167,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 
     @CacheEvict(value = "users", allEntries = true)
     @Override
-    public int deleteRecords(@NotEmpty List<User> list) {
+    public Integer deleteRecords(@NotEmpty List<User> list) {
         log.info("UserServiceImpl::deleteRecords::list = [{}]", list);
         return list.stream().mapToInt(User::getUid).reduce(0, (x, y) -> x + getDao().deleteByPrimaryKey(y));
     }
@@ -175,7 +175,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     @CacheEvict(value = "users", allEntries = true)
     @Transactional
     @Override
-    public int updateRecord(@NotNull User model) {
+    public Integer updateRecord(@NotNull User model) {
         log.info("UserServiceImpl::updateRecord::model = [{}]", model);
         if (model.getUserGroups() != null) {
             List<Integer> news = model.getUserGroups().stream().mapToInt(UserGroup::getUgid).boxed().distinct().collect(Collectors.toList());

@@ -28,7 +28,7 @@ public class AccessServiceImpl extends BaseService<Access> implements AccessServ
     }
 
     @Override
-    public int deleteRecords(@NotEmpty List<Access> list) {
+    public Integer deleteRecords(@NotEmpty List<Access> list) {
         log.info("AccessServiceImpl::deleteRecords::list = [{}]", list);
         return list.stream().mapToInt(Access::getAid).reduce(0, (x, y) -> x + getDao().deleteByPrimaryKey(y));
     }

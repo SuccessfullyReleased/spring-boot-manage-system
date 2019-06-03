@@ -58,7 +58,7 @@ public interface CommonService<T> {
      * @description 通过实体类的属性精确查询符合条件的记录数量
      * @date 2019/5/20 18:42
      **/
-    int selectCount(@NotNull T model);
+    Integer selectCount(@NotNull T model);
 
     /**
      * @param keyColumn   关键字的字段名
@@ -106,7 +106,7 @@ public interface CommonService<T> {
      * @description 插入一条记录
      * @date 2019/5/20 18:45
      **/
-    int insertRecord(@NotNull T model);
+    Integer insertRecord(@NotNull T model);
 
     /**
      * @param id 主键
@@ -115,7 +115,7 @@ public interface CommonService<T> {
      * @description 根据主键删除一条记录
      * @date 2019/5/20 18:46
      **/
-    int deleteRecord(@NotNull @Min(value = 1, message = "id最小不能小于1") Integer id);
+    Integer deleteRecord(@NotNull @Min(value = 1, message = "id最小不能小于1") Integer id);
 
     /**
      * @param list 主键的数组
@@ -124,7 +124,7 @@ public interface CommonService<T> {
      * @description 根据主键数组删除多条记录
      * @date 2019/5/20 18:46
      **/
-    int deleteRecords(@NotEmpty List<T> list);
+    Integer deleteRecords(@NotEmpty List<T> list);
 
     /**
      * @param model 实体
@@ -133,6 +133,6 @@ public interface CommonService<T> {
      * @description 更新一条记录
      * @date 2019/5/20 18:47
      **/
-    int updateRecord(@NotNull T model);
+    Integer updateRecord(@NotNull T model);
 
 }

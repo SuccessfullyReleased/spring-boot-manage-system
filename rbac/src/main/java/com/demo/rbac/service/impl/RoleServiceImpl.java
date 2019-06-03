@@ -74,7 +74,7 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
     }
 
     @Override
-    public int insertRecord(@NotNull Role model) {
+    public Integer insertRecord(@NotNull Role model) {
         log.info("RoleServiceImpl::insertRecord::model = [{}]", model);
         User admin = new User();
         admin.setUsername("admin");
@@ -97,14 +97,14 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 
     @CacheEvict(value = "roles", allEntries = true)
     @Override
-    public int deleteRecords(@NotEmpty List<Role> list) {
+    public Integer deleteRecords(@NotEmpty List<Role> list) {
         log.info("RoleServiceImpl::deleteRecords::list = [{}]", list);
         return list.stream().mapToInt(Role::getRid).reduce(0, (x, y) -> x + getDao().deleteByPrimaryKey(y));
     }
 
     @CacheEvict(value = "roles", allEntries = true)
     @Override
-    public int updateRecord(@NotNull Role model) {
+    public Integer updateRecord(@NotNull Role model) {
         log.info("RoleServiceImpl::updateRecord::model = [{}]", model);
         if (CollUtil.isNotEmpty(model.getAccesses())) {
             List<Integer> news = model.getAccesses().stream().mapToInt(Access::getAid).boxed().distinct().collect(Collectors.toList());

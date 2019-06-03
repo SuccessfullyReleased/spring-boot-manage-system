@@ -68,7 +68,7 @@ public class UserGroupServiceImpl extends BaseService<UserGroup> implements User
     }
 
     @Override
-    public int insertRecord(@NotNull UserGroup model) {
+    public Integer insertRecord(@NotNull UserGroup model) {
         log.info("UserGroupServiceImpl::insertRecord::model = [{}]", model);
         User admin = new User();
         admin.setUsername("admin");
@@ -100,14 +100,14 @@ public class UserGroupServiceImpl extends BaseService<UserGroup> implements User
 
     @CacheEvict(value = "groups", allEntries = true)
     @Override
-    public int deleteRecords(@NotEmpty List<UserGroup> list) {
+    public Integer deleteRecords(@NotEmpty List<UserGroup> list) {
         log.info("UserGroupServiceImpl::deleteRecords::list = [{}]", list);
         return list.stream().mapToInt(UserGroup::getUgid).reduce(0, (x, y) -> x + getDao().deleteByPrimaryKey(y));
     }
 
     @CacheEvict(value = "groups", allEntries = true)
     @Override
-    public int updateRecord(@NotNull UserGroup model) {
+    public Integer updateRecord(@NotNull UserGroup model) {
         log.info("UserGroupServiceImpl::updateRecord::model = [{}]", model);
         if (CollUtil.isNotEmpty(model.getRoles())) {
             List<Integer> news = model.getRoles().stream().mapToInt(Role::getRid).boxed().distinct().collect(Collectors.toList());
