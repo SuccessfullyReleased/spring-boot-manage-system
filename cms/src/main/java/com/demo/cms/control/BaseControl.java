@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
@@ -52,6 +53,17 @@ public abstract class BaseControl<T> implements CommonControl<T> {
     @Autowired
     private Gson gson;
 
+    private HttpServletRequest request;
+
+    public HttpServletRequest getRequest() {
+        return request;
+    }
+
+    @Autowired
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
+    }
+
     @Override
     public T getModel(String json) {
         Class<T> TClass = (Class<T>) ((ParameterizedType) this.getClass()
@@ -67,6 +79,11 @@ public abstract class BaseControl<T> implements CommonControl<T> {
     @Override
     public ResponseEntity selectOne(String model) {
         return new ResponseEntity<>(service.selectOne(getModel(model)), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity select(String model) {
+        return new ResponseEntity<>(service.select(getModel(model)), HttpStatus.OK);
     }
 
     @Override

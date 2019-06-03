@@ -30,51 +30,56 @@ public class CommentControlImpl extends BaseControl<Comment> {
     @GetMapping(value = "comment/cid/{id}")
     @Override
     public ResponseEntity selectOneById(@PathVariable Integer id) {
+        log.info("CommentControlImpl::selectOneById::id = [{}]", id);
         return super.selectOneById(id);
     }
 
     @GetMapping(value = "comment")
     @Override
     public ResponseEntity selectOne(@RequestParam String model) {
+        log.info("CommentControlImpl::selectOne::model = [{}]", model);
         return super.selectOne(model);
+    }
+
+    @GetMapping(value = "comments")
+    @Override
+    public ResponseEntity select(@RequestParam String model) {
+        log.info("CommentControlImpl::select::model = [{}]", model);
+        return super.select(model);
     }
 
     @GetMapping(value = "comment/count")
     @Override
     public ResponseEntity selectCount(@RequestParam String model) {
+        log.info("CommentControlImpl::selectCount::model = [{}]", model);
         return super.selectCount(model);
-    }
-
-    @GetMapping(value = "comments")
-    @Override
-    public ResponseEntity selectRecords(@RequestParam String keyColumn,
-                                        @RequestParam String key,
-                                        @RequestParam String orderColumn,
-                                        @RequestParam String order) {
-        return super.selectRecords(keyColumn, key, orderColumn, order);
     }
 
     @PostMapping(value = "comment")
     @Override
     public ResponseEntity insertRecord(@RequestBody Comment model) {
+        log.info("CommentControlImpl::insertRecord::model = [{}]", model);
         return super.insertRecord(model);
     }
 
     @DeleteMapping(value = "comment/cid/{id}")
     @Override
     public ResponseEntity deleteRecord(@PathVariable Integer id) {
+        log.info("CommentControlImpl::deleteRecord::id = [{}]", id);
         return super.deleteRecord(id);
     }
 
     @DeleteMapping(value = "comments")
     @Override
     public ResponseEntity deleteRecords(@RequestBody List<Comment> list) {
+        log.info("CommentControlImpl::deleteRecords::list = [{}]", list);
         return super.deleteRecords(list);
     }
 
     @PutMapping(value = "comment")
     @Override
     public ResponseEntity updateRecord(@RequestBody Comment model) {
+        log.info("CommentControlImpl::updateRecord::model = [{}]", model);
         return super.updateRecord(model);
     }
 }

@@ -30,51 +30,59 @@ public class NoteControlImpl extends BaseControl<Note> {
     @GetMapping(value = "note/nid/{id}")
     @Override
     public ResponseEntity selectOneById(@PathVariable Integer id) {
+        log.info("NoteControlImpl::selectOneById::id = [{}]", id);
         return super.selectOneById(id);
     }
 
     @GetMapping(value = "note")
     @Override
     public ResponseEntity selectOne(@RequestParam String model) {
+        log.info("NoteControlImpl::selectOne::model = [{}]", model);
         return super.selectOne(model);
     }
 
     @GetMapping(value = "note/count")
     @Override
     public ResponseEntity selectCount(@RequestParam String model) {
+        log.info("NoteControlImpl::selectCount::model = [{}]", model);
         return super.selectCount(model);
     }
 
     @GetMapping(value = "notes")
     @Override
-    public ResponseEntity selectRecords(@RequestParam String keyColumn,
-                                        @RequestParam String key,
-                                        @RequestParam String orderColumn,
-                                        @RequestParam String order) {
+    public ResponseEntity selectRecords(@RequestParam(required = false) String keyColumn,
+                                        @RequestParam(required = false) String key,
+                                        @RequestParam(required = false) String orderColumn,
+                                        @RequestParam(required = false) String order) {
+        log.info("NoteControlImpl::selectRecords::keyColumn = [{}], key = [{}], orderColumn = [{}], order = [{}]", keyColumn, key, orderColumn, order);
         return super.selectRecords(keyColumn, key, orderColumn, order);
     }
 
     @PostMapping(value = "note")
     @Override
     public ResponseEntity insertRecord(@RequestBody Note model) {
+        log.info("NoteControlImpl::insertRecord::model = [{}]", model);
         return super.insertRecord(model);
     }
 
     @DeleteMapping(value = "note/nid/{id}")
     @Override
     public ResponseEntity deleteRecord(@PathVariable Integer id) {
+        log.info("NoteControlImpl::deleteRecord::id = [{}]", id);
         return super.deleteRecord(id);
     }
 
     @DeleteMapping(value = "notes")
     @Override
     public ResponseEntity deleteRecords(@RequestBody List<Note> list) {
+        log.info("NoteControlImpl::deleteRecords::list = [{}]", list);
         return super.deleteRecords(list);
     }
 
     @PutMapping(value = "note")
     @Override
     public ResponseEntity updateRecord(@RequestBody Note model) {
+        log.info("NoteControlImpl::updateRecord::model = [{}]", model);
         return super.updateRecord(model);
     }
 }

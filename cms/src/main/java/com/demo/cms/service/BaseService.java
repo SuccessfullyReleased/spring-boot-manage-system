@@ -3,6 +3,7 @@ package com.demo.cms.service;
 import cn.hutool.core.util.StrUtil;
 import com.demo.cms.util.Exception.BaseException;
 import com.demo.cms.util.dao.BaseDao;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
@@ -20,6 +21,7 @@ import java.util.List;
  * @description 封装了基本的CRUD业务
  * @date 2019/5/20 18:52
  **/
+@Slf4j
 public abstract class BaseService<T> implements CommonService<T> {
     /**
      * @author 戴俊明
@@ -51,16 +53,24 @@ public abstract class BaseService<T> implements CommonService<T> {
 
     @Override
     public T selectOneById(@NotNull @Min(value = 1, message = "id最小不能小于1") Integer id) {
+        log.info("BaseService::selectOneById::id = [{}]", id);
         return get(dao.selectByPrimaryKey(id), "找不到id为" + id + "的记录");
     }
 
     @Override
     public T selectOne(@NotNull T model) {
+        log.info("BaseService::selectOne::model = [{}]", model);
         return get(dao.selectOne(model), "找不到符合" + model.toString() + "的记录");
     }
 
     @Override
-    public int selectCount(@NotNull T model) {
+    public List<T> select(@NotNull T model) {
+        return get(dao.select(model), "找不到符合" + model.toString() + "的记录");
+    }
+
+    @Override
+    public Integer selectCount(@NotNull T model) {
+        log.info("BaseService::selectCount::model = [{}]", model);
         int num = dao.selectCount(model);
         if (num > 0) {
             return num;
@@ -70,16 +80,19 @@ public abstract class BaseService<T> implements CommonService<T> {
     }
 
     @Override
-    public int insertRecord(@NotNull T model) {
+    public Integer insertRecord(@NotNull T model) {
+        log.info("BaseService::insertRecord::model = [{}]", model);
         return dao.insertSelective(model);
     }
 
     @Override
     public List<T> selectRecords(String keyColumn, String key, String orderColumn, String order) {
+        log.info("BaseService::selectRecords::keyColumn = [{}], key = [{}], orderColumn = [{}], order = [{}]", keyColumn, key, orderColumn, order);
         String[] cons = filter(keyColumn, key, orderColumn, order);
         Class<T> TClass = (Class<T>) ((ParameterizedType) this.getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0];
         Example example = new Example(TClass);
+        example.setForUpdate(true);
         if (cons[2] != null)
             example.setOrderByClause(StrUtil.format("{} {}", cons[2], cons[3]));
         if (cons[0] != null)
@@ -90,15 +103,17 @@ public abstract class BaseService<T> implements CommonService<T> {
 
     @Transactional
     @Override
-    public int deleteRecord(@NotNull @Min(value = 1, message = "id最小不能小于1") Integer id) {
+    public Integer deleteRecord(@NotNull @Min(value = 1, message = "id最小不能小于1") Integer id) {
+        log.info("BaseService::deleteRecord::id = [{}]", id);
         return dao.deleteByPrimaryKey(id);
     }
 
     @Override
-    public abstract int deleteRecords(@NotEmpty List<T> list);
+    public abstract Integer deleteRecords(@NotEmpty List<T> list);
 
     @Override
-    public int updateRecord(@NotNull T model) {
+    public Integer updateRecord(@NotNull T model) {
+        log.info("BaseService::updateRecord::model = [{}]", model);
         return dao.updateByPrimaryKeySelective(model);
     }
 }

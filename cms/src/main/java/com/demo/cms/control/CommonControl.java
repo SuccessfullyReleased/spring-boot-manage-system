@@ -34,10 +34,19 @@ public interface CommonControl<T> {
      * @param model 实体
      * @return org.springframework.http.ResponseEntity
      * @author 戴俊明
-     * @description 通过实体类的属性精确查询
+     * @description 通过实体类的属性精确查询（返回一行记录）
      * @date 2019/5/20 15:56
      **/
     ResponseEntity selectOne(String model);
+
+    /**
+     * @param model 实体
+     * @return org.springframework.http.ResponseEntity
+     * @author 戴俊明
+     * @description 通过实体类的属性精确查询（返回多行记录）
+     * @date 2019/5/31 15:26
+     **/
+    ResponseEntity select(String model);
 
     /**
      * @param model 实体

@@ -23,7 +23,7 @@ public class WebConfig implements WebMvcConfigurer {
      **/
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resource/**").addResourceLocations("file:" + ResourceConstants.AVATOR);
+        registry.addResourceHandler("/materials/**").addResourceLocations("file:" + ResourceConstants.MATERIALS);
     }
 
 }

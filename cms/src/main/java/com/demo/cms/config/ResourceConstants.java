@@ -8,13 +8,10 @@ package com.demo.cms.config;
  * @date 2019/5/20 15:37
  **/
 public class ResourceConstants {
-
     /**
      * @author 戴俊明
-     * @description 头像存储的位置
-     * @date 2019/5/20 15:37
+     * @description 材料存储的位置
+     * @date 2019/5/27 14:19
      **/
-    public static final String AVATOR = "D:/avator/";
-
-
+    public static final String MATERIALS = "D:/spring-boot-manage-system/materials/";
 }
