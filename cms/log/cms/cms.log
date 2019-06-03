@@ -1,0 +1,45 @@
+2019-06-03 15:04:32.337  INFO 20776 --- [main] com.demo.cms.CmsApplicationTests         : Starting CmsApplicationTests on DESKTOP-7FREDO7 with PID 20776 (started by 16014 in C:\Users\16014\Documents\workspace\IdeaProjects\spring-boot-manage-system\cms)
+2019-06-03 15:04:32.339  INFO 20776 --- [main] com.demo.cms.CmsApplicationTests         : No active profile set, falling back to default profiles: default
+2019-06-03 15:04:33.265  WARN 20776 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.demo.cms]' package. Please check your configuration.
+2019-06-03 15:04:33.310  INFO 20776 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-06-03 15:04:33.315  INFO 20776 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-03 15:04:33.382  INFO 20776 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 51ms. Found 0 repository interfaces.
+2019-06-03 15:04:33.846  INFO 20776 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$71d44285] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-03 15:04:36.195  INFO 20776 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-03 15:04:36.522  INFO 20776 --- [main] t.m.m.autoconfigure.MapperCacheDisabler  : Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2019-06-03 15:04:36.523  INFO 20776 --- [main] t.m.m.autoconfigure.MapperCacheDisabler  : Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2019-06-03 15:04:36.525  INFO 20776 --- [main] t.m.m.autoconfigure.MapperCacheDisabler  : Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2019-06-03 15:04:36.525  INFO 20776 --- [main] t.m.m.autoconfigure.MapperCacheDisabler  : Clear EntityHelper entityTableMap cache.
+2019-06-03 15:04:37.253  INFO 20776 --- [main] com.demo.cms.CmsApplicationTests         : Started CmsApplicationTests in 5.5 seconds (JVM running for 6.692)
+2019-06-03 15:04:37.828  INFO 20776 --- [Thread-1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-06-03 15:04:37.831  INFO 20776 --- [Thread-1] com.alibaba.druid.pool.DruidDataSource   : {dataSource-0} closing ...
+2019-06-03 15:05:44.732  INFO 16660 --- [main] com.demo.cms.CmsApplicationTests         : Starting CmsApplicationTests on DESKTOP-7FREDO7 with PID 16660 (started by 16014 in C:\Users\16014\Documents\workspace\IdeaProjects\spring-boot-manage-system\cms)
+2019-06-03 15:05:44.740  INFO 16660 --- [main] com.demo.cms.CmsApplicationTests         : No active profile set, falling back to default profiles: default
+2019-06-03 15:05:45.718  WARN 16660 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.demo.cms]' package. Please check your configuration.
+2019-06-03 15:05:45.770  INFO 16660 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-06-03 15:05:45.774  INFO 16660 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-03 15:05:45.847  INFO 16660 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 54ms. Found 0 repository interfaces.
+2019-06-03 15:05:46.340  INFO 16660 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$86edbb8d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-03 15:05:48.089  INFO 16660 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-03 15:05:48.396  INFO 16660 --- [main] t.m.m.autoconfigure.MapperCacheDisabler  : Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2019-06-03 15:05:48.397  INFO 16660 --- [main] t.m.m.autoconfigure.MapperCacheDisabler  : Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2019-06-03 15:05:48.398  INFO 16660 --- [main] t.m.m.autoconfigure.MapperCacheDisabler  : Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2019-06-03 15:05:48.398  INFO 16660 --- [main] t.m.m.autoconfigure.MapperCacheDisabler  : Clear EntityHelper entityTableMap cache.
+2019-06-03 15:05:49.154  INFO 16660 --- [main] com.demo.cms.CmsApplicationTests         : Started CmsApplicationTests in 5.198 seconds (JVM running for 6.282)
+2019-06-03 15:05:49.640  INFO 16660 --- [Thread-1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-06-03 15:05:49.642  INFO 16660 --- [Thread-1] com.alibaba.druid.pool.DruidDataSource   : {dataSource-0} closing ...
+2019-06-03 15:12:04.417  INFO 18228 --- [main] com.demo.cms.CmsApplicationTests         : Starting CmsApplicationTests on DESKTOP-7FREDO7 with PID 18228 (started by 16014 in C:\Users\16014\Documents\workspace\IdeaProjects\spring-boot-manage-system\cms)
+2019-06-03 15:12:04.419  INFO 18228 --- [main] com.demo.cms.CmsApplicationTests         : No active profile set, falling back to default profiles: default
+2019-06-03 15:12:05.409  WARN 18228 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[com.demo.cms]' package. Please check your configuration.
+2019-06-03 15:12:05.463  INFO 18228 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-06-03 15:12:05.467  INFO 18228 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-06-03 15:12:05.538  INFO 18228 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 55ms. Found 0 repository interfaces.
+2019-06-03 15:12:05.962  INFO 18228 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$5af6c418] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-06-03 15:12:07.709  INFO 18228 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-06-03 15:12:08.055  INFO 18228 --- [main] t.m.m.autoconfigure.MapperCacheDisabler  : Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2019-06-03 15:12:08.056  INFO 18228 --- [main] t.m.m.autoconfigure.MapperCacheDisabler  : Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2019-06-03 15:12:08.056  INFO 18228 --- [main] t.m.m.autoconfigure.MapperCacheDisabler  : Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2019-06-03 15:12:08.056  INFO 18228 --- [main] t.m.m.autoconfigure.MapperCacheDisabler  : Clear EntityHelper entityTableMap cache.
+2019-06-03 15:12:08.783  INFO 18228 --- [main] com.demo.cms.CmsApplicationTests         : Started CmsApplicationTests in 5.136 seconds (JVM running for 6.271)
+2019-06-03 15:12:09.270  INFO 18228 --- [Thread-1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-06-03 15:12:09.272  INFO 18228 --- [Thread-1] com.alibaba.druid.pool.DruidDataSource   : {dataSource-0} closing ...

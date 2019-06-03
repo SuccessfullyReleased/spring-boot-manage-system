@@ -1,4 +1,4 @@
-package com.demo.cms.dao.common;
+package com.demo.cms.dao;
 
 import com.demo.cms.model.Comment;
 import com.demo.cms.util.dao.BaseDao;

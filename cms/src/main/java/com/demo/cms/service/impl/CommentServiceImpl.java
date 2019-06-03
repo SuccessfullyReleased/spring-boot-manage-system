@@ -33,6 +33,7 @@ public class CommentServiceImpl extends BaseService<Comment> {
 
     @Override
     public Integer insertRecord(@NotNull Comment model) {
+        log.info("CommentServiceImpl::insertRecord::model = [{}]", model);
         model.setTime(new Date());
         return super.insertRecord(model);
     }
@@ -40,6 +41,7 @@ public class CommentServiceImpl extends BaseService<Comment> {
     @Transactional
     @Override
     public Integer deleteRecord(@NotNull @Min(value = 1, message = "id最小不能小于1") Integer id) {
+        log.info("CommentServiceImpl::deleteRecord::id = [{}]", id);
         Comment comment = new Comment();
         comment.setPid(id);
         getDao().delete(comment);

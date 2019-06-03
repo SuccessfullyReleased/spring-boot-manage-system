@@ -42,6 +42,7 @@ public class MaterialServiceImpl extends BaseService<Material> {
     @Transactional
     @Override
     public Integer insertRecord(@NotNull Material model) {
+        log.info("MaterialServiceImpl::insertRecord::model = [{}]", model);
         model.setTitle(model.getRaw().getOriginalFilename());
         model.setSize((int) model.getRaw().getSize());
         model.setTime(new Date());
@@ -53,6 +54,7 @@ public class MaterialServiceImpl extends BaseService<Material> {
     @Transactional
     @Override
     public Integer deleteRecord(@NotNull @Min(value = 1, message = "id最小不能小于1") Integer id) {
+        log.info("MaterialServiceImpl::deleteRecord::id = [{}]", id);
         Material material = getDao().selectByPrimaryKey(id);
         int result = super.deleteRecord(id);
         if (!fileDao.deleteFile(new File(ResourceConstants.MATERIALS + material.getFile()))) {
@@ -64,6 +66,7 @@ public class MaterialServiceImpl extends BaseService<Material> {
     @Transactional
     @Override
     public Integer deleteRecords(@NotEmpty List<Material> list) {
+        log.info("MaterialServiceImpl::deleteRecords::list = [{}]", list);
         return list.stream().mapToInt(Material::getMid).reduce(0, (x, y) -> x + deleteRecord(y));
     }
 }

@@ -43,6 +43,7 @@ public class NoteServiceImpl extends BaseService<Note> {
     @Transactional
     @Override
     public Integer insertRecord(@NotNull Note model) {
+        log.info("NoteServiceImpl::insertRecord::model = [{}]", model);
         model.setTime(new Date());
         Integer result = super.insertRecord(model);
         for (Floor floor : model.getFloors()) {

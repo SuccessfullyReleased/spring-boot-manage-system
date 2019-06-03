@@ -15,8 +15,26 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface MaterialControl {
 
+    /**
+     * @param type   材料类型
+     * @param note   材料简介
+     * @param author 材料的上传人
+     * @param file   材料
+     * @return org.springframework.http.ResponseEntity
+     * @author 戴俊明
+     * @description 上传一份材料
+     * @date 2019/6/3 14:43
+     **/
     ResponseEntity uploadMaterial(String type, String note, String author, MultipartFile file);
 
+    /**
+     * @param material 材料的实体
+     * @param response HTTP响应
+     * @return void
+     * @author 戴俊明
+     * @description 下载一份材料
+     * @date 2019/6/3 14:44
+     **/
     void downloadMaterial(Material material, HttpServletResponse response);
 
 }

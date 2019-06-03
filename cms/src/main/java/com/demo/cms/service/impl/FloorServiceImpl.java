@@ -34,6 +34,7 @@ public class FloorServiceImpl extends BaseService<Floor> {
 
     @Override
     public Floor selectOneById(@NotNull @Min(value = 1, message = "id最小不能小于1") Integer id) {
+        log.info("FloorServiceImpl::selectOneById::id = [{}]", id);
         Floor floor = super.selectOneById(id);
         floor.setContentText(new String(floor.getContent(), StandardCharsets.UTF_8));
         return floor;
@@ -41,6 +42,7 @@ public class FloorServiceImpl extends BaseService<Floor> {
 
     @Override
     public Floor selectOne(@NotNull Floor model) {
+        log.info("FloorServiceImpl::selectOne::model = [{}]", model);
         Floor floor = super.selectOne(model);
         floor.setContentText(new String(floor.getContent(), StandardCharsets.UTF_8));
         return floor;
@@ -48,6 +50,7 @@ public class FloorServiceImpl extends BaseService<Floor> {
 
     @Override
     public List<Floor> select(@NotNull Floor model) {
+        log.info("FloorServiceImpl::select::model = [{}]", model);
         List<Floor> floors = super.select(model);
         for (Floor floor : floors) {
             floor.setContentText(new String(floor.getContent(), StandardCharsets.UTF_8));
@@ -58,6 +61,7 @@ public class FloorServiceImpl extends BaseService<Floor> {
     @Transactional
     @Override
     public Integer insertRecord(@NotNull Floor model) {
+        log.info("FloorServiceImpl::insertRecord::model = [{}]", model);
         if (model.getTime()==null){
             model.setTime(new Date());
         }
@@ -68,12 +72,14 @@ public class FloorServiceImpl extends BaseService<Floor> {
     @Transactional
     @Override
     public Integer deleteRecords(@NotEmpty List<Floor> list) {
+        log.info("FloorServiceImpl::deleteRecords::list = [{}]", list);
         return list.stream().mapToInt(Floor::getFid).reduce(0, (x, y) -> x + getDao().deleteByPrimaryKey(y));
     }
 
     @Transactional
     @Override
     public Integer updateRecord(@NotNull Floor model) {
+        log.info("FloorServiceImpl::updateRecord::model = [{}]", model);
         model.setContent(model.getContentText().getBytes(StandardCharsets.UTF_8));
         return super.updateRecord(model);
     }

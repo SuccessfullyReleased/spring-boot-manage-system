@@ -68,10 +68,6 @@ spring:
   cache:
     type: redis
 
-mybatis:
-  typeAliasesPackage: com.demo.cms.model
-  mapperLocations: classpath:mapper/*.xml
-
 mapper:
   mappers:
     - com.demo.cms.util.dao.BaseDao
