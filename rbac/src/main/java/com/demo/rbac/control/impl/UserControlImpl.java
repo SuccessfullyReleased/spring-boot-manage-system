@@ -53,6 +53,7 @@ public class UserControlImpl extends BaseControl<User> implements UserControl {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @NoAuthorization
     @GetMapping(value = "user/uid/{id}")
     @Override
     public ResponseEntity selectOneById(@PathVariable Integer id) {
@@ -60,6 +61,7 @@ public class UserControlImpl extends BaseControl<User> implements UserControl {
         return super.selectOneById(id);
     }
 
+    @NoAuthorization
     @GetMapping(value = "user")
     @Override
     public ResponseEntity selectOne(@RequestParam String model) {
@@ -85,6 +87,7 @@ public class UserControlImpl extends BaseControl<User> implements UserControl {
         return super.selectRecords(keyColumn, key, orderColumn, order);
     }
 
+    @NoAuthorization
     @PostMapping(value = "user")
     @Override
     public ResponseEntity insertRecord(@RequestBody User model) {
