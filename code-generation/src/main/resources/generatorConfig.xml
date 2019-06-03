@@ -12,7 +12,7 @@
 		</commentGenerator>
 		<!--数据库链接地址账号密码-->
 		<jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" userId="root" password="123456"
-		                connectionURL="jdbc:mysql://localhost:3306/spring-boot-manage-system-cms?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=GMT%2B8&amp;allowPublicKeyRetrieval=true">
+		                connectionURL="jdbc:mysql://localhost:3306/spring_boot_manage_system_cms?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=GMT%2B8&amp;allowPublicKeyRetrieval=true">
 			<property name="nullCatalogMeansCurrent" value="true"/>
 		</jdbcConnection>
 		<javaTypeResolver>
@@ -33,31 +33,42 @@
 			<property name="enableSubPackages" value="true"/>
 		</javaClientGenerator>
 		<!--生成对应表及类名-->
-		<table tableName="note" domainObjectName="Note" mapperName="NoteDao"
-		       enableInsert="false"
-		       enableDeleteByPrimaryKey="false"
-		       enableUpdateByPrimaryKey="false"
-		       enableCountByExample="false"
-		       enableUpdateByExample="false"
-		       enableDeleteByExample="false"
-		       enableSelectByExample="false"
-		       selectByExampleQueryId="false">
-			<generatedKey column="nid" sqlStatement="Mysql" identity="true"/>
-		</table>
+<!--		<table tableName="note" domainObjectName="Note" mapperName="NoteDao"-->
+<!--		       enableInsert="false"-->
+<!--		       enableDeleteByPrimaryKey="false"-->
+<!--		       enableUpdateByPrimaryKey="false"-->
+<!--		       enableCountByExample="false"-->
+<!--		       enableUpdateByExample="false"-->
+<!--		       enableDeleteByExample="false"-->
+<!--		       enableSelectByExample="false"-->
+<!--		       selectByExampleQueryId="false">-->
+<!--			<generatedKey column="nid" sqlStatement="Mysql" identity="true"/>-->
+<!--		</table>-->
 
-		<table tableName="floor" domainObjectName="Floor" mapperName="FloorDao"
-		       enableInsert="false"
-		       enableDeleteByPrimaryKey="false"
-		       enableUpdateByPrimaryKey="false"
-		       enableCountByExample="false"
-		       enableUpdateByExample="false"
-		       enableDeleteByExample="false"
-		       enableSelectByExample="false"
-		       selectByExampleQueryId="false">
-			<generatedKey column="fid" sqlStatement="Mysql" identity="true"/>
-		</table>
+<!--		<table tableName="floor" domainObjectName="Floor" mapperName="FloorDao"-->
+<!--		       enableInsert="false"-->
+<!--		       enableDeleteByPrimaryKey="false"-->
+<!--		       enableUpdateByPrimaryKey="false"-->
+<!--		       enableCountByExample="false"-->
+<!--		       enableUpdateByExample="false"-->
+<!--		       enableDeleteByExample="false"-->
+<!--		       enableSelectByExample="false"-->
+<!--		       selectByExampleQueryId="false">-->
+<!--			<generatedKey column="fid" sqlStatement="Mysql" identity="true"/>-->
+<!--		</table>-->
 
-		<table tableName="comment" domainObjectName="Comment" mapperName="CommentDao"
+<!--		<table tableName="comment" domainObjectName="Comment" mapperName="CommentDao"-->
+<!--		       enableInsert="false"-->
+<!--		       enableDeleteByPrimaryKey="false"-->
+<!--		       enableUpdateByPrimaryKey="false"-->
+<!--		       enableCountByExample="false"-->
+<!--		       enableUpdateByExample="false"-->
+<!--		       enableDeleteByExample="false"-->
+<!--		       enableSelectByExample="false"-->
+<!--		       selectByExampleQueryId="false">-->
+<!--			<generatedKey column="cid" sqlStatement="Mysql" identity="true"/>-->
+<!--		</table>-->
+		<table tableName="material" domainObjectName="Material" mapperName="MaterialDao"
 		       enableInsert="false"
 		       enableDeleteByPrimaryKey="false"
 		       enableUpdateByPrimaryKey="false"
@@ -66,7 +77,7 @@
 		       enableDeleteByExample="false"
 		       enableSelectByExample="false"
 		       selectByExampleQueryId="false">
-			<generatedKey column="cid" sqlStatement="Mysql" identity="true"/>
+			<generatedKey column="mid" sqlStatement="Mysql" identity="true"/>
 		</table>
 	</context>
 </generatorConfiguration>
