@@ -3,6 +3,7 @@ package com.demo.cms.authorization.interceptor;
 
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
+import com.demo.cms.authorization.annotation.NoAuthorization;
 import com.demo.cms.authorization.config.AuthorizationConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -42,6 +43,10 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         }
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         Method method = handlerMethod.getMethod();
+        //如果方法注明了NoAuthorization，直接通过
+        if (method.getAnnotation(NoAuthorization.class) != null) {
+            return true;
+        }
         //从header中得到token
         String authorization = request.getHeader(AuthorizationConstants.AUTHORIZATION);
         log.info("{}:{}", AuthorizationConstants.AUTHORIZATION, authorization);
