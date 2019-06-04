@@ -77,6 +77,7 @@ public class UserControlImpl extends BaseControl<User> implements UserControl {
         return super.selectCount(model);
     }
 
+    @NoAuthorization
     @GetMapping(value = "users")
     @Override
     public ResponseEntity selectRecords(@RequestParam(required = false) String keyColumn,

@@ -1,6 +1,7 @@
 package com.demo.rbac.control.impl;
 
 
+import com.demo.rbac.authorization.annotation.NoAuthorization;
 import com.demo.rbac.control.AccessControl;
 import com.demo.rbac.control.BaseControl;
 import com.demo.rbac.model.Access;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AccessControlImpl extends BaseControl<Access> implements AccessControl {
 
+    @NoAuthorization
     @GetMapping(value = "accesses")
     @Override
     public ResponseEntity selectAll() {

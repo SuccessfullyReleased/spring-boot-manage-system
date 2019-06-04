@@ -1,5 +1,6 @@
 package com.demo.rbac.control.impl;
 
+import com.demo.rbac.authorization.annotation.NoAuthorization;
 import com.demo.rbac.control.BaseControl;
 import com.demo.rbac.control.UserGroupControl;
 import com.demo.rbac.model.UserGroup;
@@ -23,6 +24,7 @@ public class UserGroupControlImpl extends BaseControl<UserGroup> implements User
         super.setService(service);
     }
 
+    @NoAuthorization
     @GetMapping(value = "userGroup/ugid/{id}")
     @Override
     public ResponseEntity selectOneById(@PathVariable Integer id) {
@@ -30,6 +32,7 @@ public class UserGroupControlImpl extends BaseControl<UserGroup> implements User
         return super.selectOneById(id);
     }
 
+    @NoAuthorization
     @GetMapping(value = "userGroup")
     @Override
     public ResponseEntity selectOne(@RequestParam String model) {
@@ -37,6 +40,7 @@ public class UserGroupControlImpl extends BaseControl<UserGroup> implements User
         return super.selectOne(model);
     }
 
+    @NoAuthorization
     @GetMapping(value = "userGroup/count")
     @Override
     public ResponseEntity selectCount(@RequestParam String model) {
@@ -44,6 +48,7 @@ public class UserGroupControlImpl extends BaseControl<UserGroup> implements User
         return super.selectCount(model);
     }
 
+    @NoAuthorization
     @GetMapping(value = "userGroups")
     @Override
     public ResponseEntity selectRecords(@RequestParam(required = false) String keyColumn,

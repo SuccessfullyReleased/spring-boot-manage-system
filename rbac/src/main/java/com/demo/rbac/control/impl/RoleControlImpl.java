@@ -1,6 +1,7 @@
 package com.demo.rbac.control.impl;
 
 
+import com.demo.rbac.authorization.annotation.NoAuthorization;
 import com.demo.rbac.control.BaseControl;
 import com.demo.rbac.control.RoleControl;
 import com.demo.rbac.model.Role;
@@ -24,6 +25,7 @@ public class RoleControlImpl extends BaseControl<Role> implements RoleControl {
         super.setService(service);
     }
 
+    @NoAuthorization
     @GetMapping(value = "role/rid/{id}")
     @Override
     public ResponseEntity selectOneById(@PathVariable Integer id) {
@@ -31,6 +33,7 @@ public class RoleControlImpl extends BaseControl<Role> implements RoleControl {
         return super.selectOneById(id);
     }
 
+    @NoAuthorization
     @GetMapping(value = "role")
     @Override
     public ResponseEntity selectOne(@RequestParam String model) {
@@ -38,6 +41,7 @@ public class RoleControlImpl extends BaseControl<Role> implements RoleControl {
         return super.selectOne(model);
     }
 
+    @NoAuthorization
     @GetMapping(value = "role/count")
     @Override
     public ResponseEntity selectCount(@RequestParam String model) {
@@ -45,6 +49,7 @@ public class RoleControlImpl extends BaseControl<Role> implements RoleControl {
         return super.selectCount(model);
     }
 
+    @NoAuthorization
     @GetMapping(value = "roles")
     @Override
     public ResponseEntity selectRecords(@RequestParam(required = false) String keyColumn,
