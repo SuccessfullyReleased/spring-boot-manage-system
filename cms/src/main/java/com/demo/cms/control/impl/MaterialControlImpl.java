@@ -1,5 +1,6 @@
 package com.demo.cms.control.impl;
 
+import com.demo.cms.authorization.annotation.NoAuthorization;
 import com.demo.cms.config.ResourceConstants;
 import com.demo.cms.control.BaseControl;
 import com.demo.cms.control.MaterialControl;
@@ -7,12 +8,14 @@ import com.demo.cms.model.Material;
 import com.demo.cms.service.BaseService;
 import com.demo.cms.util.Exception.BaseException;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
@@ -78,35 +81,81 @@ public class MaterialControlImpl extends BaseControl<Material> implements Materi
                 new Material(null, null, type, note, null, author, null, null, file)), HttpStatus.CREATED);
     }
 
-    @PostMapping(value = "materials")
+    @NoAuthorization
+    @GetMapping(value = "materials/file")
     @Override
-    public void downloadMaterial(@RequestBody Material material, HttpServletResponse response) {
+    public void downloadMaterial(@RequestParam String material, HttpServletResponse response) {
         log.info("MaterialControlImpl::downloadMaterial::material = [{}], response = [{}]", material, response);
-        File file = new File(ResourceConstants.MATERIALS + material.getFile());
+        Material model = getModel(material);
+        File file = new File(ResourceConstants.MATERIALS + model.getFile());
+        String fileName = model.getTitle();
         if (!file.exists()) {
-            deleteRecord(material.getMid());
+            deleteRecord(model.getMid());
             throw new BaseException("找不到该文件", HttpStatus.NOT_FOUND);
         } else {
-            InputStream inputStream = null;
-            try {
-                inputStream = new BufferedInputStream(new FileInputStream(file));
-                byte[] buffer = new byte[inputStream.available()];
-                inputStream.read(buffer);
-                inputStream.close();
-                String fileName = material.getTitle();
-                response.reset();
-                response.setCharacterEncoding("UTF-8");
-                response.addHeader("Content-Disposition",
-                        "attachment;filename*=UTF-8''" + URLEncoder.encode(fileName, StandardCharsets.UTF_8));
-                response.addHeader("Content-Length", "" + file.length());
+            response.reset();
+            response.setContentType("application/octet-stream");
+            response.setCharacterEncoding("UTF-8");
+            response.addHeader("Content-Disposition",
+                    "attachment;filename*=UTF-8''" + URLEncoder.encode(fileName, StandardCharsets.UTF_8));
+            response.addHeader("Content-Length", "" + file.length());
 
-                OutputStream outputStream = new BufferedOutputStream(response.getOutputStream());
-                response.setContentType("application/octet-stream");
-                outputStream.write(buffer);
-                outputStream.flush();
-                outputStream.close();
+            response.setHeader("Accept-Ranges", "bytes");
+            long downloadSize = file.length();
+            long fromPos = 0, toPos = 0;
+            if (getRequest().getHeader("Range") == null) {
+                response.setHeader("Content-Length", downloadSize + "");
+            } else {
+                // 若客户端传来Range，说明之前下载了一部分，设置206状态(SC_PARTIAL_CONTENT)
+                response.setStatus(HttpServletResponse.SC_PARTIAL_CONTENT);
+                String range = getRequest().getHeader("Range");
+                String bytes = range.replaceAll("bytes=", "");
+                String[] ary = bytes.split("-");
+                fromPos = Long.parseLong(ary[0]);
+                if (ary.length == 2) {
+                    toPos = Long.parseLong(ary[1]);
+                }
+                int size;
+                if (toPos > fromPos) {
+                    size = (int) (toPos - fromPos);
+                } else {
+                    size = (int) (downloadSize - fromPos);
+                }
+                response.setHeader("Content-Length", size + "");
+                downloadSize = size;
+            }
+
+            RandomAccessFile in = null;
+            ServletOutputStream out = null;
+            try {
+                in = new RandomAccessFile(file, "rw");
+                // 设置下载起始位置
+                if (fromPos > 0) {
+                    in.seek(fromPos);
+                }
+                // 缓冲区大小
+                int bufLen = (int) (downloadSize < 2048 ? downloadSize : 2048);
+                byte[] buffer = new byte[bufLen];
+                int num;
+                int count = 0; // 当前写到客户端的大小
+                out = response.getOutputStream();
+                while ((num = in.read(buffer)) != -1) {
+                    out.write(buffer, 0, num);
+                    count += num;
+                    //处理最后一段，计算不满缓冲区的大小
+                    if (downloadSize - count < bufLen) {
+                        bufLen = (int) (downloadSize - count);
+                        if (bufLen == 0) {
+                            break;
+                        }
+                        buffer = new byte[bufLen];
+                    }
+                }
+                response.flushBuffer();
+                in.close();
+                out.close();
             } catch (IOException e) {
-                throw new BaseException(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+                log.info("数据被暂停或中断。");
             }
         }
     }

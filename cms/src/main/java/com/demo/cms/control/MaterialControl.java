@@ -35,6 +35,6 @@ public interface MaterialControl {
      * @description 下载一份材料
      * @date 2019/6/3 14:44
      **/
-    void downloadMaterial(Material material, HttpServletResponse response);
+    void downloadMaterial(String material, HttpServletResponse response);
 
 }
