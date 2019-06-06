@@ -8,16 +8,17 @@ import com.demo.cms.model.Material;
 import com.demo.cms.service.BaseService;
 import com.demo.cms.util.Exception.BaseException;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -152,10 +153,19 @@ public class MaterialControlImpl extends BaseControl<Material> implements Materi
                     }
                 }
                 response.flushBuffer();
-                in.close();
-                out.close();
             } catch (IOException e) {
                 log.info("数据被暂停或中断。");
+            } finally {
+                try {
+                    if (in != null) {
+                        in.close();
+                    }
+                    if (out != null) {
+                        out.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

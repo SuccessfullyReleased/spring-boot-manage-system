@@ -1,5 +1,7 @@
 package com.demo.cms.util.dao;
 
+import cn.hutool.core.io.FileUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,6 +16,7 @@ import java.util.UUID;
  * @description 文件操作
  * @date 2019/5/20 18:58
  **/
+@Slf4j
 @Repository
 public class FileDao {
     /**
@@ -25,6 +28,7 @@ public class FileDao {
      * @date 2019/5/20 18:58
      **/
     public File saveTo(MultipartFile file, String path) {
+        log.info("FileDao::saveTo::file = [{}], path = [{}]", file, path);
         if (file.isEmpty()) {
             return null;
         }
@@ -49,7 +53,8 @@ public class FileDao {
      * @date 2019/5/20 18:59
      **/
     public boolean deleteFile(File file) {
-        return file.delete();
+        log.info("FileDao::deleteFile::file = [{}]", file);
+        return FileUtil.del(file);
     }
 
 }
