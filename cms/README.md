@@ -1,10 +1,10 @@
 # ```cms（Content Management System）``` 内容管理系统
 
 ## 功能设计
-![](docs/img/内容管理.jpg)
+![](docs/img/cms.jpg)
 
 ## E-R图
-![](docs/img/内容管理ER图.jpg)
+![](docs/img/cms-ER.jpg)
 
 ## 持久层  
 - 使用通用mapper生成的操作类

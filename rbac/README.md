@@ -1,10 +1,10 @@
 # ```rbac（Role-Based Access Control）``` 基于角色的权限访问控制
 
 ## 功能设计
-![](docs/img/系统管理.jpg)
+![](docs/img/rbac.jpg)
 
 ## E-R图
-![](docs/img/系统管理ER图.jpg)
+![](docs/img/rbac-ER.jpg)
 
 ## 持久层  
 - 使用通用mapper生成的操作类
