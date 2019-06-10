@@ -1,5 +1,11 @@
 # ```cms（Content Management System）``` 内容管理系统
 
+## 功能设计
+![](docs/img/内容管理.jpg)
+
+## E-R图
+![](docs/img/内容管理ER图.jpg)
+
 ## 持久层  
 - 使用通用mapper生成的操作类
 
@@ -8,3 +14,7 @@
 
 ## 表现层
 - ```RESTful``` 风格的接口
+
+## 未完成扩展
+- ```RESTful``` 文档编写
+- 项目打包
